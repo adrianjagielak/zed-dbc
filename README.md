@@ -98,15 +98,18 @@ git commit. The reference lives in `extension.toml`:
 ```toml
 [grammars.dbc]
 repository = "https://github.com/adrianjagielak/zed-dbc"
-commit     = "REPLACE_WITH_PUBLISHED_COMMIT_SHA"
+commit     = "<sha-of-the-commit-you-want-pinned>"
 ```
 
-Before publishing:
+When you push grammar changes you must also bump `commit` to the new SHA in a
+follow-up commit (the grammar SHA in `extension.toml` always lags one commit
+behind the latest grammar change). Before publishing to the registry:
 
-1. Push your changes and note the commit SHA of `main`.
-2. Replace `REPLACE_WITH_PUBLISHED_COMMIT_SHA` with that SHA.
-3. Bump `version` in `extension.toml`.
-4. Open a PR against
+1. Push your grammar/extension changes.
+2. `git rev-parse HEAD` to get the new SHA.
+3. Update `commit` in `extension.toml` to that SHA, commit, and push again.
+4. Bump `version` in `extension.toml`.
+5. Open a PR against
    [`zed-industries/extensions`](https://github.com/zed-industries/extensions)
    adding this repo to the registry.
 

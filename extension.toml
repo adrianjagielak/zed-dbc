@@ -8,4 +8,4 @@ repository = "https://github.com/adrianjagielak/zed-dbc"
 
 [grammars.dbc]
 repository = "https://github.com/adrianjagielak/zed-dbc"
-commit = "REPLACE_WITH_PUBLISHED_COMMIT_SHA"
+commit = "ed9cc2115ab8a0ee51ec16431969227f4745f93f"
