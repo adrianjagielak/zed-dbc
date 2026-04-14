@@ -1,0 +1,11 @@
+id = "dbc"
+name = "DBC"
+description = "Full support for DBC (CAN database) files — syntax highlighting, outlines, brackets, and structural navigation for automotive CAN bus definitions."
+version = "0.1.0"
+schema_version = 1
+authors = ["Adrian Jagielak"]
+repository = "https://github.com/adrianjagielak/zed-dbc"
+
+[grammars.dbc]
+repository = "https://github.com/adrianjagielak/zed-dbc"
+commit = "REPLACE_WITH_PUBLISHED_COMMIT_SHA"

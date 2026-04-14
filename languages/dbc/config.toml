@@ -1,0 +1,38 @@
+name = "DBC"
+grammar = "dbc"
+path_suffixes = ["dbc", "DBC"]
+
+# DBC has no native line-comment syntax. However, CM_ stanzas act as the
+# "comment" facility in DBC, and several vendor tools emit `//` line comments
+# informally — the grammar tolerates those as extras. We expose `//` here so
+# `editor::ToggleComments` does something useful on selection.
+line_comments = ["// "]
+
+# Auto-closing and bracket matching.
+brackets = [
+  { start = "(", end = ")", close = true, newline = false },
+  { start = "[", end = "]", close = true, newline = false },
+  { start = "\"", end = "\"", close = true, newline = false, not_in = ["string"] },
+]
+
+# DBC is strongly line-oriented (one statement per line) and uses no indentation
+# of its own for top-level stanzas. Signals inside a BO_ block are *commonly*
+# indented one level below the BO_ header by convention, so we ask Zed to
+# preserve existing indentation rather than re-flowing it.
+auto_indent_using_last_non_empty_line = true
+
+tab_size = 1
+hard_tabs = false
+
+# DBC is whitespace-sensitive at the token level but tolerant of line wrapping
+# for the VAL_TABLE_ / VAL_ / BA_DEF_ ENUM lists, so a generous soft-wrap works
+# well. Leave the hard preferred length alone and let the user configure it.
+preferred_line_length = 120
+soft_wrap = "editor_width"
+
+# Words (for double-click selection and LSP-style completion) – underscores
+# and digits are part of DBC identifiers.
+word_characters = ["_"]
+
+# Show outline entries for messages, signals, value tables, etc.
+# (handled via outline.scm)

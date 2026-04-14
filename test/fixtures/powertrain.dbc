@@ -1,0 +1,96 @@
+VERSION "1.0"
+
+NS_ :
+    NS_DESC_
+    CM_
+    BA_DEF_
+    BA_
+    VAL_
+    CAT_DEF_
+    CAT_
+    FILTER
+    BA_DEF_DEF_
+    EV_DATA_
+    ENVVAR_DATA_
+    SGTYPE_
+    SGTYPE_VAL_
+    BA_DEF_SGTYPE_
+    BA_SGTYPE_
+    SIG_TYPE_REF_
+    VAL_TABLE_
+    SIG_GROUP_
+    SIG_VALTYPE_
+    SIGTYPE_VALTYPE_
+    BO_TX_BU_
+    BA_DEF_REL_
+    BA_REL_
+    BA_DEF_DEF_REL_
+    BU_SG_REL_
+    BU_EV_REL_
+    BU_BO_REL_
+    SG_MUL_VAL_
+
+BS_:
+
+BU_: EngineECU TransmissionECU Dashboard Gateway Logger
+
+VAL_TABLE_ OnOff 0 "Off" 1 "On" ;
+VAL_TABLE_ Gear 0 "Park" 1 "Reverse" 2 "Neutral" 3 "Drive" 4 "Low" ;
+
+BO_ 100 EngineData: 8 EngineECU
+ SG_ EngineSpeed : 0|16@1+ (0.125,0) [0|8031.875] "rpm" Dashboard,Gateway,Logger
+ SG_ CoolantTemp : 16|8@1- (1,-40) [-40|215] "degC" Dashboard,Logger
+ SG_ ThrottlePct : 24|8@1+ (0.392157,0) [0|100] "%" Dashboard,Logger
+ SG_ EngineOn    : 32|1@1+ (1,0) [0|1] "" Dashboard
+
+BO_ 200 TransmissionData: 8 TransmissionECU
+ SG_ CurrentGear : 0|4@1+ (1,0) [0|15] "" Dashboard,Logger
+ SG_ GearRatio   : 8|16@1+ (0.001,0) [0|65.535] "" Logger
+
+BO_ 2566844518 DiagResponse: 8 Gateway
+ SG_ ResponseCode : 0|8@1+ (1,0) [0|255] "" Logger
+
+BO_ 300 MultiplexedTelem: 8 Gateway
+ SG_ Mux M : 0|4@1+ (1,0) [0|15] "" Logger
+ SG_ VoltageCell_0 m0 : 4|12@1+ (0.001,0) [0|4.095] "V" Logger
+ SG_ VoltageCell_1 m1 : 4|12@1+ (0.001,0) [0|4.095] "V" Logger
+ SG_ Temp_Bank       m2M : 4|4@1+ (1,0) [0|15] "" Logger
+ SG_ Temp_Value      m2  : 8|8@1+ (0.5,-40) [-40|87.5] "degC" Logger
+
+BO_TX_BU_ 100 : EngineECU,Gateway ;
+
+CM_ "Powertrain example generated for tree-sitter-dbc tests." ;
+CM_ BU_ EngineECU "Main engine controller (8-cyl variant)." ;
+CM_ BO_ 100 "10 ms engine telemetry frame." ;
+CM_ SG_ 100 EngineSpeed "Crankshaft speed, 1/8 rpm resolution." ;
+CM_ SG_ 200 GearRatio   "Ratio of input to output shaft speed." ;
+
+BA_DEF_ BO_ "GenMsgCycleTime" INT 0 65535 ;
+BA_DEF_ SG_ "GenSigStartValue" FLOAT 0 1e12 ;
+BA_DEF_ BU_ "NodeLayerModules" ENUM "CanOpen","J1939","Custom" ;
+BA_DEF_    "BusType" STRING ;
+BA_DEF_REL_ BU_SG_REL_ "GenSigTimeoutValue_ECU" INT 0 1000000 ;
+
+BA_DEF_DEF_ "GenMsgCycleTime" 100 ;
+BA_DEF_DEF_ "GenSigStartValue" 0 ;
+BA_DEF_DEF_ "NodeLayerModules" "Custom" ;
+BA_DEF_DEF_ "BusType" "CAN" ;
+BA_DEF_DEF_REL_ "GenSigTimeoutValue_ECU" 0 ;
+
+BA_ "GenMsgCycleTime" BO_ 100 10 ;
+BA_ "GenMsgCycleTime" BO_ 200 50 ;
+BA_ "GenSigStartValue" SG_ 100 EngineSpeed 800 ;
+BA_ "NodeLayerModules" BU_ EngineECU "J1939" ;
+BA_REL_ "GenSigTimeoutValue_ECU" BU_SG_REL_ Dashboard SG_ 100 EngineSpeed 500 ;
+
+VAL_ 100 EngineOn    0 "Off" 1 "On" ;
+VAL_ 200 CurrentGear 0 "Park" 1 "Reverse" 2 "Neutral" 3 "Drive" 4 "Low" ;
+
+SIG_GROUP_ 100 Powertrain 1 : EngineSpeed CoolantTemp ThrottlePct ;
+
+SIG_VALTYPE_ 200 GearRatio : 1 ;
+
+SG_MUL_VAL_ 300 VoltageCell_0 Mux 0-0 ;
+SG_MUL_VAL_ 300 VoltageCell_1 Mux 1-1 ;
+SG_MUL_VAL_ 300 Temp_Bank     Mux 2-2 ;
+SG_MUL_VAL_ 300 Temp_Value    Mux 2-2 ;

@@ -1,0 +1,136 @@
+================================================================================
+Minimal message with one unsigned little-endian signal
+================================================================================
+
+BO_ 100 EngineData: 8 ECU1
+ SG_ EngineSpeed : 0|16@1+ (0.125,0) [0|8031.875] "rpm" Dashboard
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (message
+    (integer)
+    (identifier)
+    (integer)
+    (node_ref)
+    (signal
+      (identifier)
+      (integer)
+      (integer)
+      (byte_order)
+      (value_type)
+      (number)
+      (number)
+      (number)
+      (number)
+      (string)
+      (receiver_list
+        (node_ref)))))
+
+
+================================================================================
+Signed big-endian signal with multiple receivers
+================================================================================
+
+BO_ 200 Temperature: 2 Sensor
+ SG_ CoolantTemp : 7|8@0- (1,-40) [-40|215] "degC" ECU1,Dashboard,Logger
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (message
+    (integer)
+    (identifier)
+    (integer)
+    (node_ref)
+    (signal
+      (identifier)
+      (integer)
+      (integer)
+      (byte_order)
+      (value_type)
+      (number)
+      (number)
+      (number)
+      (number)
+      (string)
+      (receiver_list
+        (node_ref)
+        (node_ref)
+        (node_ref)))))
+
+
+================================================================================
+Multiplexed signals
+================================================================================
+
+BO_ 300 MuxedMessage: 8 Gateway
+ SG_ MuxSwitch M : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ Payload0 m0 : 8|16@1+ (1,0) [0|65535] "" Vector__XXX
+ SG_ Payload1 m1 : 8|16@1+ (1,0) [0|65535] "" Vector__XXX
+ SG_ SubMux m2M : 8|8@1+ (1,0) [0|255] "" Vector__XXX
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (message
+    (integer)
+    (identifier)
+    (integer)
+    (node_ref)
+    (signal
+      (identifier)
+      (mux_indicator)
+      (integer)
+      (integer)
+      (byte_order)
+      (value_type)
+      (number)
+      (number)
+      (number)
+      (number)
+      (string)
+      (receiver_list
+        (node_ref)))
+    (signal
+      (identifier)
+      (mux_indicator)
+      (integer)
+      (integer)
+      (byte_order)
+      (value_type)
+      (number)
+      (number)
+      (number)
+      (number)
+      (string)
+      (receiver_list
+        (node_ref)))
+    (signal
+      (identifier)
+      (mux_indicator)
+      (integer)
+      (integer)
+      (byte_order)
+      (value_type)
+      (number)
+      (number)
+      (number)
+      (number)
+      (string)
+      (receiver_list
+        (node_ref)))
+    (signal
+      (identifier)
+      (mux_indicator)
+      (integer)
+      (integer)
+      (byte_order)
+      (value_type)
+      (number)
+      (number)
+      (number)
+      (number)
+      (string)
+      (receiver_list
+        (node_ref)))))

@@ -1,0 +1,38 @@
+{
+  "name": "tree-sitter-dbc",
+  "version": "0.1.0",
+  "description": "DBC (CAN database) grammar for tree-sitter",
+  "main": "bindings/node",
+  "keywords": [
+    "parser",
+    "tree-sitter",
+    "dbc",
+    "can",
+    "canbus",
+    "automotive"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adrianjagielak/zed-dbc.git"
+  },
+  "dependencies": {
+    "nan": "^2.17.0"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.22.0"
+  },
+  "scripts": {
+    "build": "tree-sitter generate",
+    "test": "tree-sitter test"
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.dbc",
+      "file-types": [
+        "dbc"
+      ],
+      "highlights": "languages/dbc/highlights.scm"
+    }
+  ]
+}

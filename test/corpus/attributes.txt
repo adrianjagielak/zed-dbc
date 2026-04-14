@@ -1,0 +1,88 @@
+================================================================================
+Attribute definition — INT on messages
+================================================================================
+
+BA_DEF_ BO_ "GenMsgCycleTime" INT 0 65535 ;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (attribute_definition
+    (object_kind)
+    (string)
+    (attr_type
+      (attr_type_name)
+      (integer)
+      (integer))))
+
+
+================================================================================
+Attribute definition — ENUM
+================================================================================
+
+BA_DEF_ BU_ "NodeLayerModules" ENUM "CanOpen","J1939","Custom" ;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (attribute_definition
+    (object_kind)
+    (string)
+    (attr_type
+      (attr_type_name)
+      (string)
+      (string)
+      (string))))
+
+
+================================================================================
+Attribute definition — STRING (no params)
+================================================================================
+
+BA_DEF_ "BusType" STRING ;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (attribute_definition
+    (string)
+    (attr_type
+      (attr_type_name))))
+
+
+================================================================================
+Attribute default and value
+================================================================================
+
+BA_DEF_DEF_ "GenMsgCycleTime" 100 ;
+BA_ "GenMsgCycleTime" BO_ 100 20 ;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (attribute_default
+    (string)
+    (number))
+  (attribute_value
+    (string)
+    (object_kind)
+    (integer)
+    (number)))
+
+
+================================================================================
+Relation attribute
+================================================================================
+
+BA_DEF_REL_ BU_SG_REL_ "RelName" INT 0 100 ;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (attribute_definition_rel
+    (rel_kind)
+    (string)
+    (attr_type
+      (attr_type_name)
+      (integer)
+      (integer))))

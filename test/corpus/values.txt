@@ -1,0 +1,93 @@
+================================================================================
+Global value table
+================================================================================
+
+VAL_TABLE_ OnOff 0 "Off" 1 "On" ;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (value_table
+    (identifier)
+    (value_description
+      (integer)
+      (string))
+    (value_description
+      (integer)
+      (string))))
+
+
+================================================================================
+Signal VAL_ definitions
+================================================================================
+
+VAL_ 100 Gear 0 "Neutral" 1 "First" 2 "Second" 3 "Reverse" ;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (value_definitions
+    (integer)
+    (identifier)
+    (value_description
+      (integer)
+      (string))
+    (value_description
+      (integer)
+      (string))
+    (value_description
+      (integer)
+      (string))
+    (value_description
+      (integer)
+      (string))))
+
+
+================================================================================
+Signal group
+================================================================================
+
+SIG_GROUP_ 100 Powertrain 1 : EngineSpeed CoolantTemp ;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (signal_group
+    (integer)
+    (identifier)
+    (integer)
+    (identifier)
+    (identifier)))
+
+
+================================================================================
+Extended multiplex value
+================================================================================
+
+SG_MUL_VAL_ 300 Payload0 MuxSwitch 0-0 ;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (signal_multiplexed_value
+    (integer)
+    (identifier)
+    (identifier)
+    (mux_range
+      (integer)
+      (integer))))
+
+
+================================================================================
+Signal extended value type (float)
+================================================================================
+
+SIG_VALTYPE_ 100 EngineSpeed : 1 ;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (signal_extended_value_type
+    (integer)
+    (identifier)
+    (integer)))

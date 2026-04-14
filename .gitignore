@@ -1,0 +1,26 @@
+# tree-sitter build artefacts
+src/parser.c
+src/grammar.json
+src/node-types.json
+src/tree_sitter/
+build/
+*.wasm
+*.so
+*.dylib
+*.dll
+
+# npm
+node_modules/
+npm-debug.log*
+package-lock.json
+yarn.lock
+
+# Zed dev-extension state
+*.wasm.bak
+target/
+
+# macOS / editor cruft
+.DS_Store
+.idea/
+.vscode/
+*.swp
